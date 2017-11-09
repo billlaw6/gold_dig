@@ -11,52 +11,52 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-class ForecastData(models.Model):
-    code = models.CharField(max_length=6, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    type = models.CharField(max_length=6, blank=True, null=True)
-    report_date = models.DateField(blank=True, null=True)
+class GetForecastData(models.Model):
+    code = models.CharField(primary_key=True,
+                            max_length=6, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
+    type = models.CharField(max_length=6, blank=False, null=False)
+    report_date = models.DateField(blank=False, null=False)
     pre_eps = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-     null=True)
+        blank=False,
+     null=False)
     range = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-     null=True)
-    created_on = models.DateField(blank=True, null=True)
+        blank=False,
+     null=False)
+    created_on = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
-        db_table = 'forecast_data'
         unique_together = (('code', 'report_date'),)
 
 
-class FundHoldings(models.Model):
-    code = models.CharField(max_length=6, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-    nums = models.IntegerField(blank=True, null=True)
-    nlast = models.IntegerField(blank=True, null=True)
-    count = models.IntegerField(blank=True, null=True)
-    clast = models.IntegerField(blank=True, null=True)
+class GetFundHoldings(models.Model):
+    code = models.CharField(primary_key=True,
+                            max_length=6, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
+    date = models.DateField(blank=False, null=False)
+    nums = models.IntegerField(blank=False, null=False)
+    nlast = models.IntegerField(blank=False, null=False)
+    count = models.IntegerField(blank=False, null=False)
+    clast = models.IntegerField(blank=False, null=False)
     amount = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     ratio = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
-    created_on = models.DateField(blank=True, null=True)
+        blank=False,
+        null=False)
+    created_on = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
-        db_table = 'fund_holdings'
         unique_together = (('code', 'date'),)
 
 
@@ -65,111 +65,111 @@ class GetHData(models.Model):
     open = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     high = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     close = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     low = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     volume = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     amount = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     price_change = models.DecimalField(
-        max_digits=12, decimal_places=6, blank=True, null=True)
+        max_digits=12, decimal_places=6, blank=False, null=False)
     p_change = models.DecimalField(
         max_digits=12,
         decimal_places=6,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     ma5 = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     ma10 = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     ma20 = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     v_ma5 = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     v_ma10 = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     v_ma20 = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     diff = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     dea = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     macd = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
-    code = models.CharField(max_length=6, blank=True, null=True)
-    ktype = models.CharField(max_length=6, blank=True, null=True)
-    type = models.CharField(max_length=6, blank=True, null=True)
-    delete = models.IntegerField(blank=True, null=True)
-    fenxing = models.CharField(max_length=6, blank=True, null=True)
+        blank=False,
+        null=False)
+    code = models.CharField(max_length=6, blank=False, null=False)
+    ktype = models.CharField(max_length=6, blank=False, null=False)
+    type = models.CharField(max_length=6, blank=False, null=False)
+    delete = models.IntegerField(blank=False, null=False)
+    fenxing = models.CharField(max_length=6, blank=False, null=False)
     fx_weight = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     bi_to_be = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     bi_value = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     duan_value = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
-    operate = models.CharField(max_length=6, blank=True, null=True)
+        blank=False,
+        null=False)
+    operate = models.CharField(max_length=6, blank=False, null=False)
 
     class Meta:
         managed = True
@@ -182,111 +182,111 @@ class GetHistData(models.Model):
     open = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     high = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     close = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     low = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     volume = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     price_change = models.DecimalField(
-        max_digits=12, decimal_places=6, blank=True, null=True)
+        max_digits=12, decimal_places=6, blank=False, null=False)
     p_change = models.DecimalField(
         max_digits=12,
         decimal_places=6,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     ma5 = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     ma10 = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     ma20 = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     v_ma5 = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     v_ma10 = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     v_ma20 = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     turnover = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     diff = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     dea = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     macd = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
-    code = models.CharField(max_length=6, blank=True, null=True)
-    ktype = models.CharField(max_length=6, blank=True, null=True)
-    type = models.CharField(max_length=6, blank=True, null=True)
-    delete = models.IntegerField(blank=True, null=True)
-    fenxing = models.CharField(max_length=6, blank=True, null=True)
+        blank=False,
+        null=False)
+    code = models.CharField(max_length=6, blank=False, null=False)
+    ktype = models.CharField(max_length=6, blank=False, null=False)
+    type = models.CharField(max_length=6, blank=False, null=False)
+    delete = models.IntegerField(blank=False, null=False)
+    fenxing = models.CharField(max_length=6, blank=False, null=False)
     fx_weight = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     bi_to_be = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     bi_value = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     duan_value = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
-    operate = models.CharField(max_length=6, blank=True, null=True)
+        blank=False,
+        null=False)
+    operate = models.CharField(max_length=6, blank=False, null=False)
 
     class Meta:
         managed = True
@@ -295,45 +295,46 @@ class GetHistData(models.Model):
 
 
 class GetIndex(models.Model):
-    code = models.CharField(max_length=6, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
+    code = models.CharField(primary_key=True,
+                            max_length=6, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
     change = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     open = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     preclose = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     close = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     high = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     low = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     volume = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
-    amount = models.IntegerField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
+        blank=False,
+        null=False)
+    amount = models.IntegerField(blank=False, null=False)
+    date = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
@@ -342,48 +343,49 @@ class GetIndex(models.Model):
 
 
 class GetReportData(models.Model):
-    code = models.CharField(max_length=6, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
+    code = models.CharField(primary_key=True,
+                            max_length=6, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
     esp = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     esp_yoy = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     bvps = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     roe = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     epcf = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     net_profits = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     profits_yoy = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
-    distrib = models.CharField(blank=True, null=True)
-    report_date = models.DateField(blank=True, null=True)
+        blank=False,
+        null=False)
+    distrib = models.CharField(max_length=6, blank=False, null=False)
+    report_date = models.DateField(blank=False, null=False)
     year = models.IntegerField()
     quarter = models.IntegerField()
-    created_on = models.DateField(blank=True, null=True)
+    created_on = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
@@ -392,39 +394,40 @@ class GetReportData(models.Model):
 
 
 class GetStockBasics(models.Model):
-    code = models.CharField(max_length=6, null=True)
-    name = models.CharField(blank=True, null=True)
-    industry = models.CharField(blank=True, null=True)
-    area = models.CharField(blank=True, null=True)
-    pe = models.FloatField(blank=True, null=True)
-    outstanding = models.FloatField(blank=True, null=True)
-    totals = models.FloatField(blank=True, null=True)
+    code = models.CharField(primary_key=True,
+                            max_length=6, blank=False, null=False)
+    name = models.CharField(max_length=60, blank=False, null=False)
+    industry = models.CharField(max_length=60, blank=False, null=False)
+    area = models.CharField(max_length=60, blank=False, null=False)
+    pe = models.FloatField(blank=False, null=False)
+    outstanding = models.FloatField(blank=False, null=False)
+    totals = models.FloatField(blank=False, null=False)
     # Field name made lowercase.
     totalassets = models.FloatField(
-        db_column='totalAssets', blank=True, null=True)
+        db_column='totalAssets', blank=False, null=False)
     # Field name made lowercase.
     liquidassets = models.FloatField(
-        db_column='liquidAssets', blank=True, null=True)
+        db_column='liquidAssets', blank=False, null=False)
     # Field name made lowercase.
     fixedassets = models.FloatField(
-        db_column='fixedAssets', blank=True, null=True)
-    reserved = models.FloatField(blank=True, null=True)
+        db_column='fixedAssets', blank=False, null=False)
+    reserved = models.FloatField(blank=False, null=False)
     # Field name made lowercase.
     reservedpershare = models.FloatField(
-        db_column='reservedPerShare', blank=True, null=True)
-    esp = models.FloatField(blank=True, null=True)
-    bvps = models.FloatField(blank=True, null=True)
-    pb = models.FloatField(blank=True, null=True)
+        db_column='reservedPerShare', blank=False, null=False)
+    esp = models.FloatField(blank=False, null=False)
+    bvps = models.FloatField(blank=False, null=False)
+    pb = models.FloatField(blank=False, null=False)
     # Field name made lowercase.
     timetomarket = models.BigIntegerField(
-        db_column='timeToMarket', blank=True, null=True)
-    undp = models.FloatField(blank=True, null=True)
-    perundp = models.FloatField(blank=True, null=True)
-    rev = models.FloatField(blank=True, null=True)
-    profit = models.FloatField(blank=True, null=True)
-    gpr = models.FloatField(blank=True, null=True)
-    npr = models.FloatField(blank=True, null=True)
-    holders = models.FloatField(blank=True, null=True)
+        db_column='timeToMarket', blank=False, null=False)
+    undp = models.FloatField(blank=False, null=False)
+    perundp = models.FloatField(blank=False, null=False)
+    rev = models.FloatField(blank=False, null=False)
+    profit = models.FloatField(blank=False, null=False)
+    gpr = models.FloatField(blank=False, null=False)
+    npr = models.FloatField(blank=False, null=False)
+    holders = models.FloatField(blank=False, null=False)
     date = models.DateTimeField()
 
     class Meta:
@@ -433,68 +436,69 @@ class GetStockBasics(models.Model):
 
 
 class GetTodayAll(models.Model):
-    code = models.CharField(max_length=6, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
+    code = models.CharField(primary_key=True,
+                            max_length=6, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
     changepercent = models.DecimalField(
-        max_digits=12, decimal_places=4, blank=True, null=True)
+        max_digits=12, decimal_places=4, blank=False, null=False)
     trade = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     open = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     high = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     low = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     settlement = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     volume = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     turnoverratio = models.DecimalField(
-        max_digits=20, decimal_places=6, blank=True, null=True)
+        max_digits=20, decimal_places=6, blank=False, null=False)
     amount = models.DecimalField(
         max_digits=20,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     per = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     pb = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     mktcap = models.DecimalField(
         max_digits=20,
         decimal_places=6,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     nmc = models.DecimalField(
         max_digits=20,
         decimal_places=6,
-        blank=True,
-        null=True)
-    date = models.DateField(blank=True, null=True)
+        blank=False,
+        null=False)
+    date = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
@@ -502,85 +506,85 @@ class GetTodayAll(models.Model):
         unique_together = (('code', 'date'),)
 
 
-class NewStocks(models.Model):
-    code = models.CharField(max_length=6, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    ipo_date = models.DateField(blank=True, null=True)
-    issue_date = models.DateField(blank=True, null=True)
+class GetNewStocks(models.Model):
+    code = models.CharField(primary_key=True,
+                            max_length=6, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
+    ipo_date = models.DateField(blank=False, null=False)
+    issue_date = models.DateField(blank=False, null=False)
     amount = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     price = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     pe = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     limit = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     funds = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     ballot = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
-    created_on = models.DateField(blank=True, null=True)
+        blank=False,
+        null=False)
+    created_on = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
-        db_table = 'new_stocks'
         unique_together = (('code', 'issue_date'),)
 
 
-class ProfitData(models.Model):
-    code = models.CharField(max_length=6, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    year = models.IntegerField(blank=True, null=True)
-    report_date = models.DateField(blank=True, null=True)
+class GetProfitData(models.Model):
+    code = models.CharField(primary_key=True,
+                            max_length=6, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
+    year = models.IntegerField(blank=False, null=False)
+    report_date = models.DateField(blank=False, null=False)
     divi = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
+        blank=False,
+        null=False)
     shares = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
-    created_on = models.DateField(blank=True, null=True)
+        blank=False,
+        null=False)
+    created_on = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
-        db_table = 'profit_data'
         unique_together = (('code', 'report_date'),)
 
 
-class XsgData(models.Model):
-    code = models.CharField(max_length=6, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-    count = models.IntegerField(blank=True, null=True)
+class GetXsgData(models.Model):
+    code = models.CharField(primary_key=True,
+                            max_length=6, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
+    date = models.DateField(blank=False, null=False)
+    count = models.IntegerField(blank=False, null=False)
     ratio = models.DecimalField(
         max_digits=12,
         decimal_places=4,
-        blank=True,
-        null=True)
-    created_on = models.DateField(blank=True, null=True)
+        blank=False,
+        null=False)
+    created_on = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
-        db_table = 'xsg_data'
         unique_together = (('code', 'date', 'count'),)
