@@ -14,6 +14,7 @@
 import tushare as ts
 import pymysql
 import time
+import pandas as pd
 from datetime import datetime
 from sqlalchemy import ( create_engine, MetaData, Table, Column, DateTime,
     Boolean, Date, Integer, Numeric, String, Text, Index)
@@ -68,8 +69,22 @@ class DataAccessLayer(object):
 
 dal = DataAccessLayer()
 
+
+
+
 if __name__ == '__main__':
-    df = ts.get_stock_basics()
-    df['date'] = time.strftime('%Y-%m-%d', time.localtime())
+    n_data = ts.get_stock_basics()
+    n_data['created_at'] = time.strftime('%Y-%m-%d', time.localtime())
     engine = create_engine('mysql://root:08110010@localhost/gold_dig?charset=utf8')
-    df.to_sql('get_stock_basics', engine, if_exists='append', index=True)
+    # n_data.to_sql('get_stock_basics', engine, if_exists='append', index=True)
+    l_data = pd.read_sql_table('get_stock_basics', engine, index_col=('code'))
+    if len(n_data) > len(l_data):
+        print("fetch again")
+        print(n_data.index)
+        print(l_data.index)
+        d_data = n_data.drop(l_data.index)
+        print(len(d_data))
+        print(d_data)
+        d_data.to_sql('get_stock_basics', engine, if_exists='append', index=True)
+    else:
+        print("no fetch")

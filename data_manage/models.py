@@ -9,6 +9,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils import timezone
 
 
 class GetForecastData(models.Model):
@@ -397,8 +398,11 @@ class GetStockBasics(models.Model):
     code = models.CharField(primary_key=True,
                             max_length=6, blank=False, null=False)
     name = models.CharField(max_length=60, blank=False, null=False)
+    name_py = models.CharField(max_length=60, blank=True, null=True)
     industry = models.CharField(max_length=60, blank=False, null=False)
+    industry_py = models.CharField(max_length=60, blank=True, null=True)
     area = models.CharField(max_length=60, blank=False, null=False)
+    area_py = models.CharField(max_length=60, blank=True, null=True)
     pe = models.FloatField(blank=False, null=False)
     outstanding = models.FloatField(blank=False, null=False)
     totals = models.FloatField(blank=False, null=False)
@@ -428,7 +432,7 @@ class GetStockBasics(models.Model):
     gpr = models.FloatField(blank=False, null=False)
     npr = models.FloatField(blank=False, null=False)
     holders = models.FloatField(blank=False, null=False)
-    date = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = True
