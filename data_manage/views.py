@@ -11,14 +11,14 @@
 # @history
 #
 
-from django.shortcuts import render
 from django.http import HttpResponse
+import time
 import tushare as ts
 from data_manage.models import GetStockBasics
 from utils.db_engine import DBEngine
 import pandas as pd
-DB_fac = DBEngine()
-engine = DB_fac.get_engine()
+engine_f = DBEngine()
+engine = engine_f.get_engine()
 
 
 # Create your views here.
@@ -28,10 +28,11 @@ def get_stock_basics(request):
     的一致。
     """
     n_data = ts.get_stock_basics()
-    m_data = GetStockBasics.object.all()
+    m_data = GetStockBasics.objects.all()
     if len(m_data) < len(n_data):
         l_data = pd.read_sql_table('get_stock_basics', engine, index_col='code')
         d_data = n_data.drop(l_data.index)
+        d_data['created_at'] = time.strftime('%Y-%m-%d', time.localtime())
         d_data.to_sql('get_stock_basics', engine, if_exists='append', index=True)
         return HttpResponse('%d item inserted' % len(d_data))
     else:

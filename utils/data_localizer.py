@@ -13,7 +13,7 @@
 
 import tushare as ts
 import pymysql
-import time, threading
+import time
 import pandas as pd
 from datetime import datetime
 from sqlalchemy import ( create_engine, MetaData, Table, Column, DateTime,
@@ -26,7 +26,6 @@ class DataLocalizer(object):
     Localize data from tushare to MySQL
     """
     engine_str = 'mysql://root:08110010@localhost/gold_dig?charset=utf8'
-    stock_list = None
     def localize_basic(self):
         """
         localize data from get_stock_basics
@@ -39,20 +38,18 @@ class DataLocalizer(object):
         if len(n_data) > len(l_data):
             d_data = n_data.drop(l_data.index)
             d_data.to_sql('get_stock_basics', engine, if_exists='append', index=True)
-        self.stock_list = n_data
+        else:
+            print("no fetch")
 
     def localize_k_data(self, code=None, ktype='D'):
         """
         localize data from get_k_data
         """
         n_data = ts.get_k_data()
-        n_data['code'] = code
-        n_data['ktype'] = ktype
         n_data['created_at'] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
         engine = create_engine(self.engine_str)
         # n_data.to_sql('get_k_data', engine, if_exists='append', index=True)
-        l_data = pd.read_sql_table('get_k_data', engine,
-                                   index_col=('code','date','ktype'))
+        l_data = pd.read_sql_table('get_k_data', engine, index_col=('code'))
         if len(n_data) > len(l_data):
             d_data = n_data.drop(l_data.index)
             d_data.to_sql('get_stock_basics', engine, if_exists='append', index=True)
@@ -63,8 +60,4 @@ if __name__ == '__main__':
     data_localizer = DataLocalizer()
 
     data_localizer.localize_basic()
-
-    for code in data_localizer.stock_list:
-        t = threading.Thread(target=data_localizer.localize_k_data,
-                             args=(code,))
-        t.start()
+    data_localizer.localize_k_data()

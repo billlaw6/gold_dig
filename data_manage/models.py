@@ -28,7 +28,7 @@ class GetForecastData(models.Model):
         decimal_places=4,
         blank=False,
      null=False)
-    created_on = models.DateField(blank=False, null=False)
+    created_at = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
@@ -54,7 +54,7 @@ class GetFundHoldings(models.Model):
         decimal_places=4,
         blank=False,
         null=False)
-    created_on = models.DateField(blank=False, null=False)
+    created_at = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
@@ -386,7 +386,7 @@ class GetReportData(models.Model):
     report_date = models.DateField(blank=False, null=False)
     year = models.IntegerField()
     quarter = models.IntegerField()
-    created_on = models.DateField(blank=False, null=False)
+    created_at = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
@@ -473,6 +473,7 @@ class GetKData(models.Model):
                                  null=False)
     turnover = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
                                    null=False)
+    created_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         unique_together = (('code', 'date', 'ktype'),)
@@ -585,7 +586,7 @@ class GetNewStocks(models.Model):
         decimal_places=4,
         blank=False,
         null=False)
-    created_on = models.DateField(blank=False, null=False)
+    created_at = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
@@ -608,7 +609,7 @@ class GetProfitData(models.Model):
         decimal_places=4,
         blank=False,
         null=False)
-    created_on = models.DateField(blank=False, null=False)
+    created_at = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
@@ -616,17 +617,14 @@ class GetProfitData(models.Model):
 
 
 class GetXsgData(models.Model):
-    code = models.CharField(primary_key=True,
-                            max_length=6, blank=False, null=False)
+    code = models.CharField(primary_key=True, max_length=6, blank=False,
+                            null=False)
     name = models.CharField(max_length=50, blank=False, null=False)
     date = models.DateField(blank=False, null=False)
     count = models.IntegerField(blank=False, null=False)
-    ratio = models.DecimalField(
-        max_digits=12,
-        decimal_places=4,
-        blank=False,
-        null=False)
-    created_on = models.DateField(blank=False, null=False)
+    ratio = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
+                                null=False)
+    created_at = models.DateField(blank=False, null=False)
 
     class Meta:
         managed = True
