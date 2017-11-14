@@ -17,7 +17,8 @@ import tushare as ts
 from data_manage.models import GetStockBasics
 from utils.db_engine import DBEngine
 import pandas as pd
-engine = DBEngine.get_engine()
+DB_fac = DBEngine()
+engine = DB_fac.get_engine()
 
 
 # Create your views here.

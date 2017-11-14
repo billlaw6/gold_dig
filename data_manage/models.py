@@ -439,6 +439,45 @@ class GetStockBasics(models.Model):
         db_table = 'get_stock_basics'
 
 
+class GetKData(models.Model):
+    # code and ktype is out of return data
+    code = models.CharField(max_length=6, blank=False, null=False)
+    ktype = models.CharField(max_length=6, blank=False, null=False)
+    ########
+    date = models.DateTimeField()
+    open = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
+                               null=False)
+    high = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
+                               null=False)
+    close = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
+                                null=False)
+    low = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
+                              null=False)
+    volume = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
+                                 null=False)
+    price_change = models.DecimalField(max_digits=12, decimal_places=6,
+                                       blank=False, null=False)
+    p_change = models.DecimalField(max_digits=12, decimal_places=6,
+                                   blank=False, null=False)
+    ma5 = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
+                              null=False)
+    ma10 = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
+                               null=False)
+    ma20 = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
+                               null=False)
+    v_ma5 = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
+                                null=False)
+    v_ma10 = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
+                                 null=False)
+    v_ma20 = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
+                                 null=False)
+    turnover = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
+                                   null=False)
+
+    class Meta:
+        unique_together = (('code', 'date', 'ktype'),)
+
+
 class GetTodayAll(models.Model):
     code = models.CharField(primary_key=True,
                             max_length=6, blank=False, null=False)
