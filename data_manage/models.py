@@ -476,6 +476,8 @@ class GetKData(models.Model):
     created_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        managed = True
+        db_table = 'get_k_data'
         unique_together = (('code', 'date', 'ktype'),)
 
 

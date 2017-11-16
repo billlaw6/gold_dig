@@ -20,6 +20,13 @@ class DBEngine(object):
     engine = create_engine(
         'mysql://root:08110010@localhost/gold_dig?charset=utf8')
 
-    # @staticmethod
+    # 也可以用get_engine = classmethod(get_engine)
+    @classmethod
     def get_engine(self):
         return self.engine
+
+    # 也可以用get_engine = staticmethod(get_engine_static)
+    @staticmethod
+    def get_engine_static():
+        return create_engine(
+            'mysql://root:08110010@localhost/gold_dig?charset=utf8')

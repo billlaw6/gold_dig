@@ -11,22 +11,23 @@
 # @history
 #
 
+import time, threading
+
 import tushare as ts
 import pymysql
-import time, threading
 import pandas as pd
-from datetime import datetime
-from sqlalchemy import ( create_engine, MetaData, Table, Column, DateTime,
-    Boolean, Date, Integer, Numeric, String, Text, Index)
-
+from sqlalchemy import create_engine
 
 pymysql.install_as_MySQLdb()
+
+
 class DataLocalizer(object):
     """
     Localize data from tushare to MySQL
     """
     engine_str = 'mysql://root:08110010@localhost/gold_dig?charset=utf8'
     stock_list = None
+
     def localize_basic(self):
         """
         localize data from get_stock_basics
@@ -34,11 +35,12 @@ class DataLocalizer(object):
         n_data = ts.get_stock_basics()
         n_data['created_at'] = time.strftime('%Y-%m-%d', time.localtime())
         engine = create_engine(self.engine_str)
-        # n_data.to_sql('get_stock_basics', engine, if_exists='append', index=True)
-        l_data = pd.read_sql_table('get_stock_basics', engine, index_col=('code'))
+        l_data = pd.read_sql_table('get_stock_basics', engine,
+                                   index_col=('code'))
         if len(n_data) > len(l_data):
             d_data = n_data.drop(l_data.index)
-            d_data.to_sql('get_stock_basics', engine, if_exists='append', index=True)
+            d_data.to_sql('get_stock_basics', engine, if_exists='append',
+                          index=True)
         self.stock_list = n_data
 
     def localize_k_data(self, code=None, ktype='D'):
@@ -48,14 +50,16 @@ class DataLocalizer(object):
         n_data = ts.get_k_data()
         n_data['code'] = code
         n_data['ktype'] = ktype
-        n_data['created_at'] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+        n_data['created_at'] = time.strftime('%Y-%m-%d %H:%M:%S',
+                                             time.localtime())
         engine = create_engine(self.engine_str)
         # n_data.to_sql('get_k_data', engine, if_exists='append', index=True)
         l_data = pd.read_sql_table('get_k_data', engine,
-                                   index_col=('code','date','ktype'))
+                                   index_col=('code', 'date', 'ktype'))
         if len(n_data) > len(l_data):
             d_data = n_data.drop(l_data.index)
-            d_data.to_sql('get_stock_basics', engine, if_exists='append', index=True)
+            d_data.to_sql('get_stock_basics', engine, if_exists='append',
+                          index=True)
         else:
             print("no fetch")
 
