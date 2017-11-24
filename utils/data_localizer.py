@@ -11,21 +11,21 @@
 # @history
 #
 
-import tushare as ts
-import pymysql
 import time
-import pandas as pd
-from datetime import datetime
-from sqlalchemy import ( create_engine, MetaData, Table, Column, DateTime,
-    Boolean, Date, Integer, Numeric, String, Text, Index)
 
-
+import pymysql
 pymysql.install_as_MySQLdb()
+import pandas as pd
+from sqlalchemy import create_engine
+import tushare as ts
+
+
 class DataLocalizer(object):
     """
     Localize data from tushare to MySQL
     """
     engine_str = 'mysql://root:08110010@localhost/gold_dig?charset=utf8'
+
     def localize_basic(self):
         """
         localize data from get_stock_basics

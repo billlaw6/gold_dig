@@ -35,12 +35,12 @@ class DataLocalizer(object):
         n_data = ts.get_stock_basics()
         n_data['created_at'] = time.strftime('%Y-%m-%d', time.localtime())
         engine = create_engine(self.engine_str)
-        l_data = pd.read_sql_table('get_stock_basics', engine,
+        l_data = pd.read_sql_table('data_manage_getstockbasics', engine,
                                    index_col=('code'))
         if len(n_data) > len(l_data):
             d_data = n_data.drop(l_data.index)
-            d_data.to_sql('get_stock_basics', engine, if_exists='append',
-                          index=True)
+            d_data.to_sql('data_manage_get_stock_basics', engine,
+                          if_exists='append', index=True)
         self.stock_list = n_data
 
     def localize_k_data(self, code=None, ktype='D'):
@@ -68,6 +68,8 @@ if __name__ == '__main__':
 
     data_localizer.localize_basic()
 
+    # Effective python P21
+    # for i, code in enumerate(data_localizer.stock_list, 0):
     for code in data_localizer.stock_list:
         t = threading.Thread(target=data_localizer.localize_k_data,
                              args=(code,))

@@ -174,7 +174,6 @@ class GetHData(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'get_h_data'
         unique_together = (('code', 'date', 'ktype'),)
 
 
@@ -291,7 +290,6 @@ class GetHistData(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'get_hist_data'
         unique_together = (('code', 'date', 'ktype'),)
 
 
@@ -339,7 +337,6 @@ class GetIndex(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'get_index'
         unique_together = (('code', 'date'),)
 
 
@@ -390,7 +387,6 @@ class GetReportData(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'get_report_data'
         unique_together = (('code', 'year', 'quarter'), ('year', 'quarter'),)
 
 
@@ -436,7 +432,6 @@ class GetStockBasics(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'get_stock_basics'
 
 
 class GetKData(models.Model):
@@ -455,29 +450,21 @@ class GetKData(models.Model):
                               null=False)
     volume = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
                                  null=False)
-    price_change = models.DecimalField(max_digits=12, decimal_places=6,
-                                       blank=False, null=False)
-    p_change = models.DecimalField(max_digits=12, decimal_places=6,
-                                   blank=False, null=False)
-    ma5 = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
-                              null=False)
-    ma10 = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
-                               null=False)
-    ma20 = models.DecimalField(max_digits=12, decimal_places=4, blank=False,
-                               null=False)
-    v_ma5 = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
-                                null=False)
-    v_ma10 = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
-                                 null=False)
-    v_ma20 = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
-                                 null=False)
-    turnover = models.DecimalField(max_digits=20, decimal_places=4, blank=False,
-                                   null=False)
-    created_at = models.DateTimeField(auto_now=True)
+    # price_change = models.DecimalField(max_digits=12, decimal_places=6,
+    #                                    blank=False, null=False)
+    # p_change = models.DecimalField(max_digits=12, decimal_places=6,
+    #                                blank=False, null=False)
+    # ma5 = models.DecimalField(max_digits=12, decimal_places=4, default=0)
+    # ma10 = models.DecimalField(max_digits=12, decimal_places=4, default=0)
+    # ma20 = models.DecimalField(max_digits=12, decimal_places=4, default=0)
+    # v_ma5 = models.DecimalField(max_digits=20, decimal_places=4, default=0)
+    # v_ma10 = models.DecimalField(max_digits=20, decimal_places=4, default=0)
+    # v_ma20 = models.DecimalField(max_digits=20, decimal_places=4, default=0)
+    # turnover = models.DecimalField(max_digits=20, decimal_places=4, default=0)
+    # created_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = True
-        db_table = 'get_k_data'
         unique_together = (('code', 'date', 'ktype'),)
 
 
@@ -548,7 +535,6 @@ class GetTodayAll(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'get_today_all'
         unique_together = (('code', 'date'),)
 
 

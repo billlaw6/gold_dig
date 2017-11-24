@@ -14,6 +14,7 @@ import threading
 
 import tushare as ts
 import pymysql
+from sqlalchemy.exc import IntegrityError
 pymysql.install_as_MySQLdb()
 
 from db_engine import DBEngine
@@ -22,12 +23,16 @@ engine = DBEngine.get_engine()
 
 def localize_k_data(code, ktype='D'):
     print('fetching data of %s' % code)
-    d = ts.get_k_data(code, '2017-10-01', '2017-11-01')
+    d = ts.get_k_data(code, '2017-10-01', '2017-11-01', ktype=ktype)
     d['code'] = code
     d['ktype'] = ktype
     d1 = d.reset_index(drop=True)
     d2 = d1.set_index(['code', 'date', 'ktype'])
-    d2.to_sql('get_k_data', engine, if_exists='append', index=True)
+    try:
+        d2.to_sql('data_manage_getkdata', engine, if_exists='append',
+                  index=True)
+    except (IntegrityError, pymysql.err.IntegrityError):
+        print('duplicate')
 
 
 def main():
